@@ -1,0 +1,12 @@
+# Only needed to retrain or re-export the model. The web app itself has no install step.
+# Versions are the ones the saved results (training/results/*.json) were produced with.
+numpy==2.4.6
+pandas==3.0.5
+scikit-learn==1.9.0
+xgboost==3.4.1
+joblib
+matplotlib
+seaborn
+jupyter
+nbconvert
+openpyxl

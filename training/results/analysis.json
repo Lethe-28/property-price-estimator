@@ -1,0 +1,319 @@
+{
+  "n_train": 181150,
+  "n_test": 45288,
+  "permutation_repeats": 5,
+  "price_distribution": {
+    "n": 226438,
+    "mean": 41241100.52364886,
+    "median": 12060000.0,
+    "p05": 1900000.0,
+    "p25": 5317600.0,
+    "p75": 32000000.0,
+    "p95": 177014999.9999994,
+    "p99": 525000000.0,
+    "skewness": 5.547787791036994,
+    "log_skewness": 0.45605169146458746,
+    "by_type_median": {
+      "commercial": 65000000.0,
+      "condo": 8261440.0,
+      "house": 15000000.0,
+      "lot": 14000000.0
+    },
+    "by_type_n": {
+      "house": 92474,
+      "condo": 79308,
+      "lot": 47646,
+      "commercial": 7010
+    }
+  },
+  "practical_accuracy": {
+    "median_ape_pct": 27.481782070361167,
+    "within_25_pct": 47.06103161985515,
+    "within_50_pct": 67.45937113584174,
+    "within_100_pct": 81.59998233527645
+  },
+  "median_log_error_factor": 1.3165312503696103,
+  "by_property_type": {
+    "house": {
+      "n": 18495,
+      "median_price": 15000000.0,
+      "r2": 0.7832037277300135,
+      "log_r2": 0.7394341754176874,
+      "mae": 17061307.20949262,
+      "median_ape_pct": 25.657811348397924,
+      "within_50_pct": 70.90565017572317
+    },
+    "condo": {
+      "n": 15862,
+      "median_price": 8364000.0,
+      "r2": 0.6865129093071752,
+      "log_r2": 0.7227853457533335,
+      "mae": 6000185.03334059,
+      "median_ape_pct": 20.26010544124724,
+      "within_50_pct": 78.08599167822469
+    },
+    "lot": {
+      "n": 9529,
+      "median_price": 14000000.0,
+      "r2": 0.4890858884596049,
+      "log_r2": 0.3972301361978746,
+      "mae": 37752350.574454926,
+      "median_ape_pct": 59.41989459473568,
+      "within_50_pct": 45.40875223003463
+    },
+    "commercial": {
+      "n": 1402,
+      "median_price": 70000000.0,
+      "r2": 0.3984709544396575,
+      "log_r2": 0.31980956632897894,
+      "mae": 86055242.35018107,
+      "median_ape_pct": 47.54438503612185,
+      "within_50_pct": 51.64051355206848
+    }
+  },
+  "by_price_tier": [
+    {
+      "tier": 1,
+      "n": 8959,
+      "price_min": 350000.0,
+      "price_max": 4499999.0,
+      "median_signed_error_pct": 68.92544152804848,
+      "median_ape_pct": 68.92544152804848
+    },
+    {
+      "tier": 2,
+      "n": 9135,
+      "price_min": 4500000.0,
+      "price_max": 8630000.0,
+      "median_signed_error_pct": 15.557041667511722,
+      "median_ape_pct": 24.213358093197822
+    },
+    {
+      "tier": 3,
+      "n": 9036,
+      "price_min": 8636000.0,
+      "price_max": 17742400.0,
+      "median_signed_error_pct": 8.09044838640101,
+      "median_ape_pct": 23.393550311635313
+    },
+    {
+      "tier": 4,
+      "n": 9100,
+      "price_min": 17748000.0,
+      "price_max": 42296000.0,
+      "median_signed_error_pct": 1.0186824515731319,
+      "median_ape_pct": 21.875263398179587
+    },
+    {
+      "tier": 5,
+      "n": 9058,
+      "price_min": 42300000.0,
+      "price_max": 1000000000.0,
+      "median_signed_error_pct": -10.734065700669653,
+      "median_ape_pct": 26.521873902856406
+    }
+  ],
+  "impurity_importance_group": {
+    "Location": 0.4185405494914463,
+    "Size": 0.5154877015675281,
+    "Property type": 0.06597174894102571
+  },
+  "impurity_importance_columns": {
+    "num__sqm": 0.35586190366251835,
+    "num__lot_area_m2": 0.1106038861565312,
+    "num__bedrooms": 0.02687419998614957,
+    "num__bathrooms": 0.022147711762328905,
+    "num__lat": 0.09204240922137949,
+    "num__lng": 0.07408570645069441,
+    "te__city": 0.1667654755806071,
+    "te__province": 0.05110211803302302,
+    "te__region": 0.034544840205742264,
+    "onehot__property_type_commercial": 0.02336992024693396,
+    "onehot__property_type_condo": 0.01339448481293144,
+    "onehot__property_type_house": 0.012629107427833637,
+    "onehot__property_type_lot": 0.01657823645332668
+  },
+  "permutation_importance": {
+    "RandomForestRegression": {
+      "feature": {
+        "sqm": {
+          "drop_r2": 0.7403117408991484,
+          "drop_log_r2": 0.7440780090018461
+        },
+        "lot_area_m2": {
+          "drop_r2": 0.0886168827694146,
+          "drop_log_r2": 0.25845570003556656
+        },
+        "bedrooms": {
+          "drop_r2": 0.02361858047161518,
+          "drop_log_r2": 0.0563766891205143
+        },
+        "bathrooms": {
+          "drop_r2": 0.025641328022617448,
+          "drop_log_r2": 0.033751692441729375
+        },
+        "lat": {
+          "drop_r2": 0.09877787961864185,
+          "drop_log_r2": 0.11178375054831662
+        },
+        "lng": {
+          "drop_r2": 0.062074380924452166,
+          "drop_log_r2": 0.090136273649627
+        },
+        "city": {
+          "drop_r2": 0.25071838577353167,
+          "drop_log_r2": 0.20944607232822676
+        },
+        "province": {
+          "drop_r2": 0.0330335815815274,
+          "drop_log_r2": 0.07400984176419981
+        },
+        "region": {
+          "drop_r2": 0.012227924406451174,
+          "drop_log_r2": 0.04987139757157164
+        },
+        "property_type": {
+          "drop_r2": 0.13505963325689088,
+          "drop_log_r2": 0.29016560151776727
+        }
+      },
+      "group": {
+        "Location": {
+          "drop_r2": 0.6728689406201898,
+          "drop_log_r2": 0.43069515639266126
+        },
+        "Size": {
+          "drop_r2": 0.9869954347823606,
+          "drop_log_r2": 1.1170627474165342
+        },
+        "Property type": {
+          "drop_r2": 0.13012019156660348,
+          "drop_log_r2": 0.2839645206321594
+        }
+      }
+    },
+    "XGBoostRegression": {
+      "feature": {
+        "sqm": {
+          "drop_r2": 0.6699137494382171,
+          "drop_log_r2": 1.2302820626592346
+        },
+        "lot_area_m2": {
+          "drop_r2": 0.10633895105817263,
+          "drop_log_r2": 1.6008454419060896
+        },
+        "bedrooms": {
+          "drop_r2": 0.027310140401093273,
+          "drop_log_r2": 0.03839759411417376
+        },
+        "bathrooms": {
+          "drop_r2": 0.027689856711033457,
+          "drop_log_r2": 0.11855861340827498
+        },
+        "lat": {
+          "drop_r2": 0.14506823465289195,
+          "drop_log_r2": 1.5032549226936924
+        },
+        "lng": {
+          "drop_r2": 0.06329459868330926,
+          "drop_log_r2": 0.3765255366514172
+        },
+        "city": {
+          "drop_r2": 0.1862593934626649,
+          "drop_log_r2": 1.6719167944766518
+        },
+        "province": {
+          "drop_r2": 0.027684353910566627,
+          "drop_log_r2": 0.6239645529519171
+        },
+        "region": {
+          "drop_r2": 0.007985392904629207,
+          "drop_log_r2": 0.1485940172592279
+        },
+        "property_type": {
+          "drop_r2": 0.12160739889770478,
+          "drop_log_r2": 0.38246457768732556
+        }
+      },
+      "group": {
+        "Location": {
+          "drop_r2": 0.6628910764337299,
+          "drop_log_r2": 0.5321975505794653
+        },
+        "Size": {
+          "drop_r2": 0.9648840823174499,
+          "drop_log_r2": 1.5968121645724451
+        },
+        "Property type": {
+          "drop_r2": 0.11809630413657983,
+          "drop_log_r2": 0.3714123822735555
+        }
+      }
+    }
+  },
+  "efficiency": {
+    "preprocessing_fit_s": 1.8463936999905854,
+    "RandomForestRegression": {
+      "fit_s": 68.31303329998627,
+      "predict_45288_s": 1.392056999990018,
+      "predict_ms_per_1000": 30.737877583245407
+    },
+    "XGBoostRegression": {
+      "fit_s": 9.23173769999994,
+      "predict_45288_s": 0.20325819999561645,
+      "predict_ms_per_1000": 4.488124889498685
+    },
+    "xgboost_refit_matches_committed_r2": true,
+    "artifact_size_mb": 215.958074,
+    "cpu_count": 8
+  },
+  "impurity_importance_group_xgboost_gain": {
+    "Location": 0.28819982148706913,
+    "Size": 0.31938429176807404,
+    "Property type": 0.3924158439040184
+  },
+  "bias": {
+    "median_signed_error_pct": 10.912296476406533,
+    "share_over_predicted_pct": 60.88146970499911,
+    "median_signed_log_error": 0.10356958117833859
+  },
+  "by_predicted_tier": [
+    {
+      "tier": 1,
+      "n": 9058,
+      "median_signed_error_pct": 11.56034919815225
+    },
+    {
+      "tier": 2,
+      "n": 9057,
+      "median_signed_error_pct": 11.430199911470735
+    },
+    {
+      "tier": 3,
+      "n": 9058,
+      "median_signed_error_pct": 9.256880845462046
+    },
+    {
+      "tier": 4,
+      "n": 9057,
+      "median_signed_error_pct": 10.45802041228768
+    },
+    {
+      "tier": 5,
+      "n": 9058,
+      "median_signed_error_pct": 10.779978851894688
+    }
+  ],
+  "spatial_bias": {
+    "RandomForestRegression": {
+      "median_signed_error_pct": 195.95629150097292,
+      "share_over_predicted_pct": 89.08903757076686,
+      "median_signed_log_error_positive_only": 1.0850412419977928
+    },
+    "XGBoostRegression": {
+      "median_signed_error_pct": 137.0694290909091,
+      "share_over_predicted_pct": 81.98661863098302,
+      "median_signed_log_error_positive_only": 0.865726754649236
+    }
+  }
+}

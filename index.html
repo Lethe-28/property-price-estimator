@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Property Price Estimator</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the estimate</a>
+
+<header class="top">
+  <div class="wrap">
+    <h1>Property Price Estimator</h1>
+    <p class="sub">Philippine property listings. A 300-tree Random Forest running entirely in this page. Import your own spreadsheet on the My data tab.</p>
+    <div class="tabs" role="tablist" aria-label="Sections">
+      <button type="button" role="tab" id="tabbtn-estimate" aria-controls="tab-estimate" aria-selected="true" data-tab="estimate">Estimate</button>
+      <button type="button" role="tab" id="tabbtn-explore" aria-controls="tab-explore" aria-selected="false" tabindex="-1" data-tab="explore">Explore the model</button>
+      <button type="button" role="tab" id="tabbtn-data" aria-controls="tab-data" aria-selected="false" tabindex="-1" data-tab="data">My data</button>
+      <button type="button" role="tab" id="tabbtn-about" aria-controls="tab-about" aria-selected="false" tabindex="-1" data-tab="about">About and limits</button>
+    </div>
+  </div>
+</header>
+
+<div id="loading" class="loading" role="status">
+  <div class="spinner" aria-hidden="true"></div>
+  <p id="loading-text">Loading the model&hellip;</p>
+</div>
+
+<main id="main" class="wrap" hidden>
+
+  <section id="tab-estimate" role="tabpanel" aria-labelledby="tabbtn-estimate" tabindex="-1">
+    <div class="layout">
+
+      <form id="inputs" class="panel" novalidate autocomplete="off">
+        <h2>Describe the property</h2>
+
+        <div class="presets" role="group" aria-label="Example listings">
+          <span class="presets-label">Try an example</span>
+          <button type="button" class="chip" data-preset="condo-davao">Condo in Davao City</button>
+          <button type="button" class="chip" data-preset="house-qc">House in Quezon City</button>
+          <button type="button" class="chip" data-preset="lot-cebu">Vacant lot in Cebu</button>
+        </div>
+
+        <fieldset>
+          <legend>Location</legend>
+          <div class="field">
+            <label for="region">Region</label>
+            <select id="region"></select>
+          </div>
+          <div class="field">
+            <label for="province">Province</label>
+            <select id="province"></select>
+          </div>
+          <div class="field">
+            <label for="city">City</label>
+            <input id="city" type="text" list="citylist" placeholder="Start typing a city" aria-describedby="city-msg" spellcheck="false">
+            <datalist id="citylist"></datalist>
+            <p class="msg" id="city-msg" role="alert"></p>
+            <label class="check"><input type="checkbox" id="unlisted"> My city isn't listed</label>
+            <p class="hint" id="city-hint"></p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Property type</legend>
+          <div class="seg" id="type" role="radiogroup" aria-label="Property type">
+            <label><input type="radio" name="ptype" value="house"><span>House</span></label>
+            <label><input type="radio" name="ptype" value="condo"><span>Condo</span></label>
+            <label><input type="radio" name="ptype" value="lot"><span>Lot</span></label>
+            <label><input type="radio" name="ptype" value="commercial"><span>Commercial</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Size</legend>
+          <div class="field">
+            <label for="sqm">Floor area (m&sup2;)</label>
+            <div class="pair">
+              <input id="sqm-range" type="range" min="0" max="1000" step="1" aria-label="Floor area slider">
+              <input id="sqm" type="number" inputmode="decimal" min="0" max="10000" step="any" aria-describedby="sqm-msg">
+            </div>
+            <p class="msg" id="sqm-msg" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="lot">Lot area (m&sup2;), optional</label>
+            <input id="lot" type="number" inputmode="decimal" min="0" max="500000" step="any" aria-describedby="lot-msg lot-hint">
+            <p class="hint" id="lot-hint">Leave blank if unknown. For condos the floor area is used.</p>
+            <p class="msg" id="lot-msg" role="alert"></p>
+          </div>
+          <div class="steppers">
+            <div class="field">
+              <label for="bed">Bedrooms</label>
+              <div class="stepper">
+                <button type="button" data-step="bed" data-dir="-1" aria-label="One fewer bedroom">&minus;</button>
+                <input id="bed" type="number" inputmode="numeric" min="0" max="20" step="1" aria-describedby="bed-msg">
+                <button type="button" data-step="bed" data-dir="1" aria-label="One more bedroom">+</button>
+              </div>
+              <p class="msg" id="bed-msg" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="bath">Bathrooms</label>
+              <div class="stepper">
+                <button type="button" data-step="bath" data-dir="-1" aria-label="One fewer bathroom">&minus;</button>
+                <input id="bath" type="number" inputmode="numeric" min="0" max="20" step="1" aria-describedby="bath-msg">
+                <button type="button" data-step="bath" data-dir="1" aria-label="One more bathroom">+</button>
+              </div>
+              <p class="msg" id="bath-msg" role="alert"></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <details class="adv">
+          <summary>Advanced: coordinates</summary>
+          <p class="hint" id="geo-hint">Filled in from the city's typical position. Change them to price a specific spot.</p>
+          <div class="steppers">
+            <div class="field">
+              <label for="lat">Latitude</label>
+              <input id="lat" type="number" inputmode="decimal" min="4" max="21.5" step="any" aria-describedby="lat-msg">
+              <p class="msg" id="lat-msg" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="lng">Longitude</label>
+              <input id="lng" type="number" inputmode="decimal" min="116" max="127" step="any" aria-describedby="lng-msg">
+              <p class="msg" id="lng-msg" role="alert"></p>
+            </div>
+          </div>
+        </details>
+
+        <div class="actions"><button type="button" id="reset" class="ghost">Reset</button></div>
+      </form>
+
+      <div class="results">
+        <section class="card hero" id="result" tabindex="-1">
+          <p class="sr-only" id="live" role="status" aria-live="polite"></p>
+          <p class="eyebrow">Estimated asking price</p>
+          <p class="price" id="price">&nbsp;</p>
+          <p class="range" id="range-line"></p>
+          <p class="note" id="range-note"></p>
+          <div class="badge" id="badge" hidden></div>
+          <p class="note disclaimer">This estimates the asking price shown in online listings. It is not a sold price or a professional appraisal.</p>
+        </section>
+
+        <section class="card chart">
+          <div class="chart-head">
+            <h3>How uncertain is this?</h3>
+            <div class="toggle" role="group" aria-label="Chart view">
+              <button type="button" id="view-range" aria-pressed="true">Likely range</button>
+              <button type="button" id="view-trees" aria-pressed="false">Tree agreement</button>
+            </div>
+          </div>
+          <p class="summary" id="sum-range"></p>
+          <div class="plot mid" id="plot-range" role="img" aria-labelledby="sum-range"></div>
+        </section>
+
+        <section class="card chart">
+          <h3>Price against floor area</h3>
+          <p class="summary" id="sum-area"></p>
+          <div class="plot" id="plot-area" role="img" aria-labelledby="sum-area"></div>
+        </section>
+
+        <section class="card chart">
+          <h3>What changes this estimate</h3>
+          <p class="summary" id="sum-drivers"></p>
+          <p class="key" id="key-drivers"><span><i class="dot up"></i>Estimate would rise</span><span><i class="dot down"></i>Estimate would fall</span></p>
+          <div class="plot short" id="plot-drivers" role="img" aria-labelledby="sum-drivers"></div>
+        </section>
+
+        <section class="card chart">
+          <h3>Where it sits in the local market</h3>
+          <p class="summary" id="sum-market"></p>
+          <div class="plot short" id="plot-market" role="img" aria-labelledby="sum-market"></div>
+        </section>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="tab-explore" role="tabpanel" aria-labelledby="tabbtn-explore" tabindex="-1" hidden>
+    <div class="stack">
+      <p class="lede">How the model performed on 45,288 listings it had never seen, and what it relies on. Every figure here is read from the paper's results files.</p>
+
+      <section class="card chart">
+        <h3>How close are the predictions?</h3>
+        <p class="summary" id="x-sum-scatter"></p>
+        <div class="plot tall" id="x-scatter" role="img" aria-labelledby="x-sum-scatter"></div>
+      </section>
+
+      <section class="card chart">
+        <h3>Where is it more and less accurate?</h3>
+        <p class="summary" id="x-sum-accuracy"></p>
+        <div class="trio">
+          <div><h4>R&sup2; <span class="dir">higher is better</span></h4><div class="plot mini" id="x-acc-r2" role="img" aria-label="R squared by property type"></div></div>
+          <div><h4>Typical error <span class="dir">lower is better</span></h4><div class="plot mini" id="x-acc-err" role="img" aria-label="Median error by property type"></div></div>
+          <div><h4>Within 50% of the price <span class="dir">higher is better</span></h4><div class="plot mini" id="x-acc-w50" role="img" aria-label="Share of estimates within 50 percent by property type"></div></div>
+        </div>
+      </section>
+
+      <section class="card chart">
+        <div class="chart-head">
+          <h3>What drives price?</h3>
+          <div class="toggle" role="group" aria-label="Importance measure">
+            <button type="button" id="imp-r2" aria-pressed="true">Peso scale</button>
+            <button type="button" id="imp-log" aria-pressed="false">Log scale</button>
+          </div>
+        </div>
+        <p class="summary" id="x-sum-importance"></p>
+        <div class="plot mid" id="x-importance" role="img" aria-labelledby="x-sum-importance"></div>
+      </section>
+
+      <section class="card chart">
+        <h3>Random Forest and XGBoost compared</h3>
+        <p class="summary">Both were trained on the same data and tested on the same 45,288 listings. The Random Forest is the model behind this app.</p>
+        <div class="table-wrap">
+          <table class="metrics">
+            <thead><tr><th scope="col">Measure</th><th scope="col">Random Forest</th><th scope="col">XGBoost</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">R&sup2; (peso scale)</th><td data-src="metrics.holdout.RandomForestRegression.r2" data-fmt="r4"></td><td data-src="metrics.holdout.XGBoostRegression.r2" data-fmt="r4"></td></tr>
+              <tr><th scope="row">Mean absolute error</th><td data-src="metrics.holdout.RandomForestRegression.mae_php" data-fmt="php"></td><td data-src="metrics.holdout.XGBoostRegression.mae_php" data-fmt="php"></td></tr>
+              <tr><th scope="row">Root mean squared error</th><td data-src="metrics.holdout.RandomForestRegression.rmse_php" data-fmt="php"></td><td data-src="metrics.holdout.XGBoostRegression.rmse_php" data-fmt="php"></td></tr>
+              <tr><th scope="row">Mean absolute percentage error</th><td data-src="metrics.holdout.RandomForestRegression.mape_pct" data-fmt="pct1"></td><td data-src="metrics.holdout.XGBoostRegression.mape_pct" data-fmt="pct1"></td></tr>
+              <tr><th scope="row">Impossible predictions (zero or below)</th><td data-src="metrics.holdout.RandomForestRegression.n_non_positive_predictions" data-fmt="int"></td><td data-src="metrics.holdout.XGBoostRegression.n_non_positive_predictions" data-fmt="int"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card chart">
+        <h3>Does it work in a city it has never seen?</h3>
+        <p class="summary" id="x-sum-spatial"></p>
+        <div class="badge bad" id="x-spatial-warning">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3l8 14H2z"/><path d="M10 8.5v3.5M10 14.5v.5"/></svg>
+          <div><strong>Not reliably.</strong><span id="x-spatial-text"></span></div>
+        </div>
+        <div class="plot mid" id="x-spatial" role="img" aria-labelledby="x-sum-spatial"></div>
+      </section>
+
+      <section class="card chart">
+        <h3>How are asking prices distributed?</h3>
+        <p class="summary" id="x-sum-dist"></p>
+        <div class="plot" id="x-dist" role="img" aria-labelledby="x-sum-dist"></div>
+      </section>
+    </div>
+  </section>
+
+  <section id="tab-data" role="tabpanel" aria-labelledby="tabbtn-data" tabindex="-1" hidden>
+    <div class="stack">
+      <p class="lede">Import a spreadsheet of property listings. The rows are checked, priced by the same Random Forest, and saved in a SQLite database inside your browser. Charts and written insights are built from that database with SQL queries. Nothing is uploaded anywhere.</p>
+
+      <section class="card" id="d-drop">
+        <h3>1. Import a file</h3>
+        <p class="summary">Accepts .csv, .xlsx or .xls with one listing per row. Required columns: <code>property_type</code> (house, condo, lot or commercial) and <code>price_php</code>. Optional: <code>sqm</code>, <code>lot_area_m2</code>, <code>bedrooms</code>, <code>bathrooms</code>, <code>city</code>, <code>province</code>, <code>region</code>, <code>lat</code>, <code>lng</code>. Common alternative column names are recognised. Up to 100,000 rows.</p>
+        <div class="d-actions">
+          <input id="d-file" class="sr-only" type="file" accept=".csv,.txt,.xlsx,.xls">
+          <label class="filebtn" for="d-file">Choose a file</label>
+          <button type="button" class="ghost" id="d-sample">Use the sample file (1,600 listings)</button>
+          <a class="linkbtn" href="sample/sample_listings.csv" download>Download sample .csv</a>
+          <a class="linkbtn" href="sample/sample_listings.xlsx" download>Download sample .xlsx</a>
+        </div>
+        <p class="hint">You can also drop a file anywhere on this card. Importing again adds to what is already stored.</p>
+        <p class="msg-line" id="d-status" role="status" aria-live="polite" hidden></p>
+      </section>
+
+      <section class="card" id="d-empty">
+        <h3>Nothing stored yet</h3>
+        <p class="summary">Import a file above and the insights, charts and database contents appear here.</p>
+      </section>
+
+      <div class="stack" id="d-report" hidden>
+        <div class="kpis" id="d-kpis"></div>
+
+        <section class="card">
+          <h3>2. Insights from your data</h3>
+          <ul class="insights" id="d-insights"></ul>
+        </section>
+
+        <section class="card chart">
+          <h3>Asking price by region</h3>
+          <p class="summary" id="d-sum-region"></p>
+          <div class="plot" id="d-region" role="img" aria-labelledby="d-sum-region"></div>
+        </section>
+
+        <section class="card chart">
+          <h3>Price spread by property type</h3>
+          <p class="summary" id="d-sum-box"></p>
+          <div class="plot" id="d-box" role="img" aria-labelledby="d-sum-box"></div>
+        </section>
+
+        <section class="card chart">
+          <h3>Asking price against the model's estimate</h3>
+          <p class="summary" id="d-sum-scatter"></p>
+          <div class="plot tall" id="d-scatter" role="img" aria-labelledby="d-sum-scatter"></div>
+        </section>
+
+        <section class="card chart">
+          <h3>Who asks more than the model, and who asks less?</h3>
+          <p class="summary" id="d-sum-gap"></p>
+          <div class="plot mid" id="d-gap" role="img" aria-labelledby="d-sum-gap"></div>
+        </section>
+
+        <section class="card chart">
+          <h3>Listings worth a second look</h3>
+          <p class="summary">Only listings with a city the model was trained on, a floor area and a region are included, because the model fills blanks with typical values and its estimate is weakest there. A large gap does not mean the listing is a bargain or overpriced: it may be unusual, or contain a typing mistake.</p>
+          <h4 class="sub-h">Asking furthest below the estimate</h4>
+          <div class="table-wrap"><table class="metrics">
+            <thead><tr><th scope="col">Type</th><th scope="col">City</th><th scope="col">Floor area</th><th scope="col">Asking</th><th scope="col">Estimate</th><th scope="col">Gap</th></tr></thead>
+            <tbody id="d-low"></tbody></table></div>
+          <h4 class="sub-h">Asking furthest above the estimate</h4>
+          <div class="table-wrap"><table class="metrics">
+            <thead><tr><th scope="col">Type</th><th scope="col">City</th><th scope="col">Floor area</th><th scope="col">Asking</th><th scope="col">Estimate</th><th scope="col">Gap</th></tr></thead>
+            <tbody id="d-high"></tbody></table></div>
+        </section>
+
+        <section class="card chart">
+          <h3>3. The database</h3>
+          <p class="summary">Two tables, <code>imports</code> and <code>listings</code>, plus a view, <code>listing_gap</code>. The schema is in <code>database/schema.sql</code> in the repository.</p>
+          <h4 class="sub-h">Imported files</h4>
+          <div class="table-wrap"><table class="metrics">
+            <thead><tr><th scope="col">File</th><th scope="col">Imported</th><th scope="col">Rows read</th><th scope="col">Stored</th><th scope="col">Rejected</th></tr></thead>
+            <tbody id="d-imports"></tbody></table></div>
+          <h4 class="sub-h">First rows of <code>listings</code></h4>
+          <div class="table-wrap"><table class="metrics">
+            <thead><tr><th scope="col">Type</th><th scope="col">City</th><th scope="col">Region</th><th scope="col">Floor area</th><th scope="col">Asking</th><th scope="col">Estimate</th></tr></thead>
+            <tbody id="d-preview"></tbody></table></div>
+          <div class="d-actions">
+            <button type="button" class="ghost" id="d-download" hidden>Download database (.sqlite)</button>
+            <button type="button" class="ghost danger" id="d-clear" hidden>Clear stored data</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-about" role="tabpanel" aria-labelledby="tabbtn-about" tabindex="-1" hidden>
+    <article class="card prose">
+      <h2>About this estimator</h2>
+      <p>This is the demonstration application for the paper <em>Predicting Residential Property Prices in the Philippines Using Machine Learning</em> (Section 4.7). It runs the same Random Forest the paper reports, entirely inside your browser. Nothing you type leaves this page.</p>
+
+      <h3>The data</h3>
+      <p>The model learned from <span data-src="dataset.rows_deduplicated" data-fmt="int"></span> asking prices for houses, condos, lots and commercial properties across the Philippines. The dataset started as <span data-src="dataset.rows_raw" data-fmt="int"></span> scraped listings; duplicates of the same listing were removed. Snapshot date: <span data-src="dataset.declared_snapshot_date" data-fmt="text"></span>, as declared by the dataset's author (paper Section 3.2).</p>
+
+      <h3>The model</h3>
+      <p>A Random Forest is a crowd of decision trees. This one has <span data-src="metrics.config.RandomForestRegression.n_estimators" data-fmt="int"></span> trees, each at most <span data-src="metrics.config.RandomForestRegression.max_depth" data-fmt="int"></span> questions deep. Each tree turns ten facts about a listing into its own price guess: floor area, lot area, bedrooms, bathrooms, latitude, longitude, city, province, region and property type. The estimate you see is the average of all the guesses.</p>
+
+      <h3>What the numbers mean</h3>
+      <ul>
+        <li><strong>Accuracy.</strong> On listings it had never seen, the model's R&sup2; was <span data-src="metrics.holdout.RandomForestRegression.r2" data-fmt="r2"></span> (0 means no better than always guessing the average price; 1 means perfect). The typical estimate was off by <span data-src="analysis.practical_accuracy.median_ape_pct" data-fmt="pct0"></span> of the asking price, and <span data-src="analysis.practical_accuracy.within_50_pct" data-fmt="pct0"></span> of estimates landed within 50% of it (Section 4.2).</li>
+        <li><strong>Likely range.</strong> Measured on the same unseen listings, separately for each property type: it is the span that held the actual asking price for 80% of them. It describes past performance. It is not a guarantee for any one property.</li>
+        <li><strong>Tree agreement.</strong> Shows how closely the trees agree with each other. Trees can agree and still be wrong, so this is not a measure of accuracy.</li>
+      </ul>
+
+      <h3>Five limits that matter</h3>
+      <ol>
+        <li><strong>Asking prices, not sale prices.</strong> The data are what sellers advertised. What a property sells for can differ, and an appraisal is a different thing again.</li>
+        <li><strong>Unfamiliar cities.</strong> When a whole city (<span data-src="metrics.spatial_holdout.city" data-fmt="text"></span>) was left out of training, R&sup2; fell to <span data-src="metrics.spatial_holdout.metrics.RandomForestRegression.r2" data-fmt="r2"></span>. That is worse than guessing the average price. The estimator warns you when a city is not in its training data (Section 4.4).</li>
+        <li><strong>Lots and commercial properties are much harder.</strong> The typical error is <span data-src="analysis.by_property_type.house.median_ape_pct" data-fmt="pct0"></span> for houses and <span data-src="analysis.by_property_type.condo.median_ape_pct" data-fmt="pct0"></span> for condos, but <span data-src="analysis.by_property_type.lot.median_ape_pct" data-fmt="pct0"></span> for lots and <span data-src="analysis.by_property_type.commercial.median_ape_pct" data-fmt="pct0"></span> for commercial properties.</li>
+        <li><strong>Scraped data contains mistakes.</strong> For example, <span data-src="dataset.out_of_domain.sqm_gt_10000.rows" data-fmt="int"></span> raw listings claim more than 10,000 m&sup2;, and one claims <span data-src="dataset.out_of_domain.sqm_max" data-fmt="int"></span> m&sup2;. Province and region are missing for <span data-src="dataset.missing_pct_deduplicated.province" data-fmt="pct1"></span> of listings and lot area for <span data-src="dataset.missing_pct_deduplicated.lot_area_m2" data-fmt="pct1"></span>. The inputs here only accept sensible values.</li>
+        <li><strong>The estimate leans high.</strong> For the typical listing it is about <span data-src="analysis.bias.median_signed_error_pct" data-fmt="pct0"></span> above the actual asking price, and it was above it for <span data-src="analysis.bias.share_over_predicted_pct" data-fmt="pct0"></span> of test listings (Sections 4.2 and 5.2).</li>
+      </ol>
+
+      <h3>Source and licence</h3>
+      <p>Data: Christian (covaga.xyz), <em>Philippines Real Estate Asking Prices</em>, Hugging Face, snapshot <span data-src="dataset.declared_snapshot_date" data-fmt="text"></span>, repository <span data-src="dataset.source_repo" data-fmt="text"></span> on huggingface.co. Licensed under CC BY 4.0.</p>
+    </article>
+  </section>
+
+</main>
+
+<noscript><style>#loading{display:none}</style><p class="wrap noscript">This app needs JavaScript. Open index.html in Chrome, Edge or Firefox with JavaScript enabled.</p></noscript>
+<button type="button" class="pricebar" id="pricebar" hidden><span class="pb-text">Estimate <strong id="pb-price"></strong></span><span class="pb-go">See details</span></button>
+<script src="assets/app.js"></script>
+</body>
+</html>

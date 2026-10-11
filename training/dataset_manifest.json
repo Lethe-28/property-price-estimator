@@ -1,0 +1,200 @@
+{
+  "generated_at": "2026-09-26T17:16:04.940568+00:00",
+  "generated_by": "scripts/batch0_env_check.py",
+  "task": "IT20L Final Project — Task 3 Results & Discussion",
+  "dataset": {
+    "source_repo": "covaga/Philippines-Real-Estate-Asking-Prices",
+    "declared_snapshot_date": "2026-08-30",
+    "observed_file_mtime": "2026-09-08",
+    "file": "data/listings.csv",
+    "bytes": 44947488,
+    "sha256": "f474ea4bf0c48fd03945a855d51d7eeb4a9e7a6b080727a251367bfa603b1cca",
+    "rows_raw": 241496,
+    "columns_count": 25,
+    "columns": [
+      "listing_id",
+      "source_id",
+      "canonical_id",
+      "listing_type",
+      "property_type",
+      "property_subtype",
+      "price_php",
+      "sqm",
+      "lot_area_m2",
+      "price_per_sqm",
+      "bedrooms",
+      "bathrooms",
+      "city",
+      "district",
+      "barangay",
+      "province",
+      "region",
+      "lat",
+      "lng",
+      "n_photos",
+      "first_seen",
+      "last_seen",
+      "is_active",
+      "quality_score",
+      "new_build_flag"
+    ],
+    "rows_deduplicated": 226438,
+    "dedup_key": "canonical_id (keep latest last_seen)"
+  },
+  "recovery": {
+    "source_url": "https://huggingface.co/datasets/covaga/Philippines-Real-Estate-Asking-Prices",
+    "huggingface_revision": null,
+    "declared_snapshot_date": "2026-08-30",
+    "snapshot_date_provenance": "from the dataset citation in the documentation, not from the download; the file mtime does not corroborate it",
+    "version_control": "not tracked; data/ is gitignored (45MB)",
+    "copies": "the working copy is the only copy in version control",
+    "offsite_backup": "researcher backs the file up off-machine (decided 2026-09-27)",
+    "identity_check": "sha256 above is authoritative. A re-download that hashes differently is NOT the dataset these results came from.",
+    "revision_sha_note": "not captured at download time and deliberately not invented; add it if the platform's own copy of the dataset surfaces"
+  },
+  "data_quality": {
+    "rows_measured": 241496,
+    "out_of_domain": {
+      "sqm_gt_10000": {
+        "rows": 1442,
+        "share_pct": 0.5971
+      },
+      "sqm_eq_0": {
+        "rows": 618,
+        "share_pct": 0.2559
+      },
+      "bathrooms_gt_20": {
+        "rows": 58,
+        "share_pct": 0.024
+      },
+      "bedrooms_gt_20": {
+        "rows": 52,
+        "share_pct": 0.0215
+      },
+      "lat_outside_ph": {
+        "rows": 15,
+        "share_pct": 0.0062
+      },
+      "lng_outside_ph": {
+        "rows": 7,
+        "share_pct": 0.0029
+      },
+      "sqm_max": 45000000.0,
+      "sqm_max_note": "Largest raw sqm value in the scraped data. The Results section cites this as the input-domain noise example."
+    },
+    "property_type_counts": {
+      "house": 97133,
+      "condo": 88132,
+      "lot": 49039,
+      "commercial": 7192
+    },
+    "n_regions": 17,
+    "n_provinces": 84,
+    "note": "Recorded, not cleaned. Bounds the Batch 4 application's inputs and is a stated limitation in the Results & Discussion.",
+    "missing_pct_deduplicated": {
+      "sqm": 13.78,
+      "lot_area_m2": 81.84,
+      "bedrooms": 39.46,
+      "bathrooms": 62.94,
+      "lat": 0.57,
+      "lng": 0.57,
+      "city": 0.0,
+      "province": 24.76,
+      "region": 24.76,
+      "property_type": 0.0
+    },
+    "missing_pct_note": "Share of rows with no value per model input, measured on the 226,438 deduplicated listings. Backs the missing-values figure and the input-domain discussion in the Results & Discussion; these are recorded, not imputed."
+  },
+  "environment": {
+    "python": "3.14.6",
+    "platform": "Windows-10-10.0.19044-SP0",
+    "pandas": "3.0.5",
+    "numpy": "2.4.6",
+    "scikit-learn": "1.9.0",
+    "xgboost": "3.4.1",
+    "lightgbm": "4.7.0"
+  },
+  "seeds": {
+    "global": 42,
+    "train_test_split": 42,
+    "target_encoder_cv": "KFold(n_splits=5, shuffle=True, random_state=42)"
+  },
+  "locked_feature_set": {
+    "numeric": [
+      "sqm",
+      "lot_area_m2",
+      "bedrooms",
+      "bathrooms",
+      "lat",
+      "lng"
+    ],
+    "target_encoded": [
+      "city",
+      "province",
+      "region"
+    ],
+    "one_hot": [
+      "property_type"
+    ],
+    "excluded_as_leakage": [
+      "price_per_sqm"
+    ],
+    "excluded_as_unavailable_at_inference": [
+      "district",
+      "barangay",
+      "property_subtype"
+    ]
+  },
+  "application": {
+    "entrypoint": "app/app.py",
+    "framework": "streamlit",
+    "framework_pin": "streamlit==1.51.0",
+    "launch": "streamlit run app/app.py",
+    "python_requirement": ">=3.9,<3.14",
+    "artifact": "artifacts/price_pipeline.joblib",
+    "logic_module": "app/predict.py",
+    "tests": "tests/test_app.py",
+    "note": "Streamlit publishes no cp314 wheel: its pyarrow pin is <22, and the earliest pyarrow with a cp314 wheel is 23. The model environment here is Python 3.14.6, so streamlit cannot be installed and the UI could not be launched on this interpreter. app/predict.py therefore holds no streamlit import, so the prediction logic is fully testable on 3.14 via tests/test_app.py. To run the UI, use Python 3.13 or earlier.",
+    "replicated_training_step": "The condo lot_area_m2 back-fill was a dataframe step in the training notebook, not part of the saved pipeline, so predict.py repeats it. Omitting it changes a real condo prediction by about 6%.",
+    "artifact_size_bytes": 215958074,
+    "artifact_size_note": "206.0 MiB (216.0 MB). Older notes in CONTEXT.md and RESULTS_LOG.md say '206MB', which is the MiB figure; both are correct.",
+    "parity_check": {
+      "note": "One real condo row replayed through the notebook's own preprocessing.",
+      "row_selected_by": "first condo row with a missing lot_area_m2 and a known sqm",
+      "app_prediction_php": 26994354.0,
+      "training_time_prediction_php": 26994354.0,
+      "prediction_if_backfill_skipped_php": 25308370.0,
+      "error_if_skipped_pct": 6.3,
+      "asserted_by": "tests/test_app.py (training-time parity and back-fill checks)"
+    },
+    "numeric_input_bounds": {
+      "note": "Ceilings the app enforces, imported from app/predict.py NUMERIC_BOUNDS. Deliberately far below the raw-data extremes.",
+      "min_max_by_field": {
+        "sqm": [
+          0.0,
+          10000.0
+        ],
+        "lot_area_m2": [
+          0.0,
+          500000.0
+        ],
+        "bedrooms": [
+          0.0,
+          20.0
+        ],
+        "bathrooms": [
+          0.0,
+          20.0
+        ],
+        "lat": [
+          4.0,
+          21.5
+        ],
+        "lng": [
+          116.0,
+          127.0
+        ]
+      }
+    }
+  }
+}

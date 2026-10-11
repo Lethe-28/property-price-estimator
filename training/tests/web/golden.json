@@ -1,0 +1,4493 @@
+{
+ "note": "Expected values: app/predict.py::predict_price where it accepts the row, else reference_predict (same steps, blank -> NaN); the two are asserted equal wherever both apply. Regenerate with scripts/make_golden.py.",
+ "environment": {
+  "python": "3.14.6",
+  "scikit_learn": "1.9.0",
+  "numpy": "2.4.6",
+  "pandas": "3.0.5"
+ },
+ "cases": [
+  {
+   "id": "paper_demo",
+   "tag": "paper_demo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Davao Region",
+    "property_type": "condo"
+   },
+   "expected": 7185884.223076954
+  },
+  {
+   "id": "corrected_region_demo",
+   "tag": "corrected_region_demo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 7367844.741737968
+  },
+  {
+   "id": "edge_000",
+   "tag": "condo_blank_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 0.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 83150921.71397062
+  },
+  {
+   "id": "edge_001",
+   "tag": "condo_blank_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 20.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 3162678.0948240166
+  },
+  {
+   "id": "edge_002",
+   "tag": "condo_blank_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 35.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 7014813.251804608
+  },
+  {
+   "id": "edge_003",
+   "tag": "condo_blank_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 7367844.741737968
+  },
+  {
+   "id": "edge_004",
+   "tag": "condo_blank_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 14376239.178607306
+  },
+  {
+   "id": "edge_005",
+   "tag": "condo_blank_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 250.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 68233756.84208225
+  },
+  {
+   "id": "edge_006",
+   "tag": "condo_blank_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 1000.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 71991490.78766248
+  },
+  {
+   "id": "edge_007",
+   "tag": "condo_blank_lot",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": null,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 10923639.407584269
+  },
+  {
+   "id": "edge_008",
+   "tag": "condo_given_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": 30.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 6835452.824574407
+  },
+  {
+   "id": "edge_009",
+   "tag": "condo_given_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": 500.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 25643069.58173872
+  },
+  {
+   "id": "edge_010",
+   "tag": "condo_given_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": 5000.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 34447763.03724061
+  },
+  {
+   "id": "edge_011",
+   "tag": "house_blank_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 80.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5375445.413469513
+  },
+  {
+   "id": "edge_012",
+   "tag": "house_blank_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 400.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 29035220.7440516
+  },
+  {
+   "id": "edge_013",
+   "tag": "house_blank_lot",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": null,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 34156248.39793247
+  },
+  {
+   "id": "edge_014",
+   "tag": "lot_blank_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 80.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "lot"
+   },
+   "expected": 3499552.418434873
+  },
+  {
+   "id": "edge_015",
+   "tag": "lot_blank_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 400.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "lot"
+   },
+   "expected": 11746235.25010348
+  },
+  {
+   "id": "edge_016",
+   "tag": "lot_blank_lot",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": null,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "lot"
+   },
+   "expected": 87965345.04122552
+  },
+  {
+   "id": "edge_017",
+   "tag": "commercial_blank_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 80.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "commercial"
+   },
+   "expected": 22626822.938165683
+  },
+  {
+   "id": "edge_018",
+   "tag": "commercial_blank_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 400.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "commercial"
+   },
+   "expected": 37581562.54873279
+  },
+  {
+   "id": "edge_019",
+   "tag": "commercial_blank_lot",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": null,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "commercial"
+   },
+   "expected": 47001481.44452911
+  },
+  {
+   "id": "edge_020",
+   "tag": "unseen_city",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Atlantis",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 11521303.213268125
+  },
+  {
+   "id": "edge_021",
+   "tag": "unseen_province",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Narnia",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 4710839.457000875
+  },
+  {
+   "id": "edge_022",
+   "tag": "unseen_region",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Mordor",
+    "property_type": "house"
+   },
+   "expected": 4656077.930484244
+  },
+  {
+   "id": "edge_023",
+   "tag": "unseen_all_three",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Atlantis",
+    "province": "Narnia",
+    "region": "Mordor",
+    "property_type": "house"
+   },
+   "expected": 7878728.884458718
+  },
+  {
+   "id": "edge_024",
+   "tag": "old_default_region_spelling",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Davao Region",
+    "property_type": "house"
+   },
+   "expected": 4656077.930484244
+  },
+  {
+   "id": "edge_025",
+   "tag": "unseen_city",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Atlantis",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 10728861.10502199
+  },
+  {
+   "id": "edge_026",
+   "tag": "unseen_province",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Narnia",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 7366002.533859093
+  },
+  {
+   "id": "edge_027",
+   "tag": "unseen_region",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Mordor",
+    "property_type": "condo"
+   },
+   "expected": 7185884.223076954
+  },
+  {
+   "id": "edge_028",
+   "tag": "unseen_all_three",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Atlantis",
+    "province": "Narnia",
+    "region": "Mordor",
+    "property_type": "condo"
+   },
+   "expected": 9420577.958362382
+  },
+  {
+   "id": "edge_029",
+   "tag": "old_default_region_spelling",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Davao Region",
+    "property_type": "condo"
+   },
+   "expected": 7185884.223076954
+  },
+  {
+   "id": "edge_030",
+   "tag": "unseen_city",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Atlantis",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "lot"
+   },
+   "expected": 33154138.561195668
+  },
+  {
+   "id": "edge_031",
+   "tag": "unseen_province",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Narnia",
+    "region": "Region XI (Davao Region)",
+    "property_type": "lot"
+   },
+   "expected": 16874796.03205517
+  },
+  {
+   "id": "edge_032",
+   "tag": "unseen_region",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Mordor",
+    "property_type": "lot"
+   },
+   "expected": 16852521.420341004
+  },
+  {
+   "id": "edge_033",
+   "tag": "unseen_all_three",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Atlantis",
+    "province": "Narnia",
+    "region": "Mordor",
+    "property_type": "lot"
+   },
+   "expected": 17175324.11198294
+  },
+  {
+   "id": "edge_034",
+   "tag": "old_default_region_spelling",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Davao Region",
+    "property_type": "lot"
+   },
+   "expected": 16852521.420341004
+  },
+  {
+   "id": "edge_035",
+   "tag": "unseen_city",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Atlantis",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "commercial"
+   },
+   "expected": 33514266.10536052
+  },
+  {
+   "id": "edge_036",
+   "tag": "unseen_province",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Narnia",
+    "region": "Region XI (Davao Region)",
+    "property_type": "commercial"
+   },
+   "expected": 34709622.96829587
+  },
+  {
+   "id": "edge_037",
+   "tag": "unseen_region",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Mordor",
+    "property_type": "commercial"
+   },
+   "expected": 23343657.830785107
+  },
+  {
+   "id": "edge_038",
+   "tag": "unseen_all_three",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Atlantis",
+    "province": "Narnia",
+    "region": "Mordor",
+    "property_type": "commercial"
+   },
+   "expected": 27833247.585851636
+  },
+  {
+   "id": "edge_039",
+   "tag": "old_default_region_spelling",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Davao Region",
+    "property_type": "commercial"
+   },
+   "expected": 23343657.830785107
+  },
+  {
+   "id": "edge_040",
+   "tag": "unseen_city_prototype_name",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "constructor",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 10728861.10502199
+  },
+  {
+   "id": "edge_041",
+   "tag": "unseen_city_case",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "davao city",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 10728861.10502199
+  },
+  {
+   "id": "edge_042",
+   "tag": "unseen_property_type",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "villa"
+   },
+   "expected": 6918546.123642757
+  },
+  {
+   "id": "edge_043",
+   "tag": "unseen_property_type",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "HOUSE"
+   },
+   "expected": 6918546.123642757
+  },
+  {
+   "id": "edge_044",
+   "tag": "unseen_property_type",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "townhouse"
+   },
+   "expected": 6918546.123642757
+  },
+  {
+   "id": "edge_045",
+   "tag": "padded_property_type",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": " house "
+   },
+   "expected": 4702637.583282438
+  },
+  {
+   "id": "edge_046",
+   "tag": "padded_city",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "  Davao City  ",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 7367844.741737968
+  },
+  {
+   "id": "edge_047",
+   "tag": "blank_sqm",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": null,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 10923639.407584269
+  },
+  {
+   "id": "edge_048",
+   "tag": "blank_lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 7367844.741737968
+  },
+  {
+   "id": "edge_049",
+   "tag": "blank_bedrooms",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": null,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 7367844.741737968
+  },
+  {
+   "id": "edge_050",
+   "tag": "blank_bathrooms",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": null,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 7367844.741737968
+  },
+  {
+   "id": "edge_051",
+   "tag": "blank_lat",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": null,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 8891262.76694929
+  },
+  {
+   "id": "edge_052",
+   "tag": "blank_lng",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": null,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 8810028.99601503
+  },
+  {
+   "id": "edge_053",
+   "tag": "blank_city",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": null,
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 11725191.515001995
+  },
+  {
+   "id": "edge_054",
+   "tag": "blank_province",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": null,
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 7386518.116587875
+  },
+  {
+   "id": "edge_055",
+   "tag": "blank_region",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": null,
+    "property_type": "condo"
+   },
+   "expected": 7161505.57390735
+  },
+  {
+   "id": "edge_056",
+   "tag": "blank_property_type",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": null
+   },
+   "expected": 4702637.583282438
+  },
+  {
+   "id": "edge_057",
+   "tag": "blank_all",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": null,
+    "lot_area_m2": null,
+    "bedrooms": null,
+    "bathrooms": null,
+    "lat": null,
+    "lng": null,
+    "city": null,
+    "province": null,
+    "region": null,
+    "property_type": null
+   },
+   "expected": 97155649.94538274
+  },
+  {
+   "id": "edge_058",
+   "tag": "blank_location",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": null,
+    "province": null,
+    "region": null,
+    "property_type": "condo"
+   },
+   "expected": 10236542.561901191
+  },
+  {
+   "id": "edge_059",
+   "tag": "blank_size",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": null,
+    "lot_area_m2": null,
+    "bedrooms": null,
+    "bathrooms": null,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 10923639.407584269
+  },
+  {
+   "id": "edge_060",
+   "tag": "blank_geo_and_type",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": null,
+    "lng": null,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": null
+   },
+   "expected": 5463634.530434877
+  },
+  {
+   "id": "edge_061",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 0.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 83150921.71397062
+  },
+  {
+   "id": "edge_062",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 0.001,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 83150921.71397062
+  },
+  {
+   "id": "edge_063",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 10000.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 212743027.5871799
+  },
+  {
+   "id": "edge_064",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 45000000.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 290212434.6213175
+  },
+  {
+   "id": "edge_065",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 0.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 59846288.566285424
+  },
+  {
+   "id": "edge_066",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 0.001,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 59846288.566285424
+  },
+  {
+   "id": "edge_067",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 10000.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 209179554.38366872
+  },
+  {
+   "id": "edge_068",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 45000000.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 256113208.13931748
+  },
+  {
+   "id": "edge_069",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 0.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "lot"
+   },
+   "expected": 46128337.185937844
+  },
+  {
+   "id": "edge_070",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 0.001,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "lot"
+   },
+   "expected": 46128337.185937844
+  },
+  {
+   "id": "edge_071",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 10000.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "lot"
+   },
+   "expected": 138785532.64792484
+  },
+  {
+   "id": "edge_072",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 45000000.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "lot"
+   },
+   "expected": 216982166.4742381
+  },
+  {
+   "id": "edge_073",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 0.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "commercial"
+   },
+   "expected": 197673936.57582664
+  },
+  {
+   "id": "edge_074",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 0.001,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "commercial"
+   },
+   "expected": 197673936.57582664
+  },
+  {
+   "id": "edge_075",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 10000.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "commercial"
+   },
+   "expected": 547839458.4002991
+  },
+  {
+   "id": "edge_076",
+   "tag": "extreme_sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 45000000.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "commercial"
+   },
+   "expected": 463137396.7923335
+  },
+  {
+   "id": "edge_077",
+   "tag": "extreme_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": 0.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "lot"
+   },
+   "expected": 21343671.44905587
+  },
+  {
+   "id": "edge_078",
+   "tag": "extreme_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": 500000.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "lot"
+   },
+   "expected": 170892239.0629894
+  },
+  {
+   "id": "edge_079",
+   "tag": "extreme_lot",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": 1000000000.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "lot"
+   },
+   "expected": 236578455.92822748
+  },
+  {
+   "id": "edge_080",
+   "tag": "extreme_bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 0.0,
+    "bathrooms": 0.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 12125777.83151244
+  },
+  {
+   "id": "edge_081",
+   "tag": "extreme_bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 20.0,
+    "bathrooms": 20.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 26819359.517862324
+  },
+  {
+   "id": "edge_082",
+   "tag": "extreme_bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 301.0,
+    "bathrooms": 301.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 143666573.13369644
+  },
+  {
+   "id": "edge_083",
+   "tag": "extreme_latlng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 4.0,
+    "lng": 116.0,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 27023753.38432264
+  },
+  {
+   "id": "edge_084",
+   "tag": "extreme_latlng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 21.5,
+    "lng": 127.0,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 16284936.405292885
+  },
+  {
+   "id": "edge_085",
+   "tag": "extreme_latlng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 0.0,
+    "lng": 0.0,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 27023753.38432264
+  },
+  {
+   "id": "edge_086",
+   "tag": "extreme_latlng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 60.0,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": -90.0,
+    "lng": 180.0,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "condo"
+   },
+   "expected": 22648861.4806747
+  },
+  {
+   "id": "edge_087",
+   "tag": "at_threshold_f64:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 1300.5,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 70312195.37705289
+  },
+  {
+   "id": "edge_088",
+   "tag": "at_threshold_floor32:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 1300.5,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 70312195.37705289
+  },
+  {
+   "id": "edge_089",
+   "tag": "at_threshold_next32:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 1300.5001220703125,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 70639950.84871955
+  },
+  {
+   "id": "edge_090",
+   "tag": "at_threshold_f64:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 128.29000091552734,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 21894050.86285694
+  },
+  {
+   "id": "edge_091",
+   "tag": "at_threshold_floor32:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 128.2899932861328,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 21380329.44019195
+  },
+  {
+   "id": "edge_092",
+   "tag": "at_threshold_next32:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 128.29000854492188,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 21894050.86285694
+  },
+  {
+   "id": "edge_093",
+   "tag": "at_threshold_f64:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 17.5,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 35592475.584153384
+  },
+  {
+   "id": "edge_094",
+   "tag": "at_threshold_floor32:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 17.5,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 35592475.584153384
+  },
+  {
+   "id": "edge_095",
+   "tag": "at_threshold_next32:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 17.500001907348633,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 16025622.681187665
+  },
+  {
+   "id": "edge_096",
+   "tag": "at_threshold_f64:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 37.5,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5581477.32766997
+  },
+  {
+   "id": "edge_097",
+   "tag": "at_threshold_floor32:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 37.5,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5581477.32766997
+  },
+  {
+   "id": "edge_098",
+   "tag": "at_threshold_next32:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 37.500003814697266,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5551596.96092905
+  },
+  {
+   "id": "edge_099",
+   "tag": "at_threshold_f64:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 57.60000038146973,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6145221.13380984
+  },
+  {
+   "id": "edge_100",
+   "tag": "at_threshold_floor32:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 57.599998474121094,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6145221.13380984
+  },
+  {
+   "id": "edge_101",
+   "tag": "at_threshold_next32:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 57.60000228881836,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6148485.558993645
+  },
+  {
+   "id": "edge_102",
+   "tag": "at_threshold_f64:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 123.5,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 11521848.585395824
+  },
+  {
+   "id": "edge_103",
+   "tag": "at_threshold_floor32:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 123.5,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 11521848.585395824
+  },
+  {
+   "id": "edge_104",
+   "tag": "at_threshold_next32:sqm",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 123.50000762939453,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 13841153.040770162
+  },
+  {
+   "id": "edge_105",
+   "tag": "at_threshold_f64:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 781.5,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 25288308.8416217
+  },
+  {
+   "id": "edge_106",
+   "tag": "at_threshold_floor32:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 781.5,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 25288308.8416217
+  },
+  {
+   "id": "edge_107",
+   "tag": "at_threshold_next32:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 781.5000610351562,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 25376086.154857434
+  },
+  {
+   "id": "edge_108",
+   "tag": "at_threshold_f64:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 81.93500137329102,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5897134.7856434025
+  },
+  {
+   "id": "edge_109",
+   "tag": "at_threshold_floor32:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 81.93499755859375,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5897134.7856434025
+  },
+  {
+   "id": "edge_110",
+   "tag": "at_threshold_next32:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 81.93500518798828,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5968946.56765245
+  },
+  {
+   "id": "edge_111",
+   "tag": "at_threshold_f64:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 204.5,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7552491.73460764
+  },
+  {
+   "id": "edge_112",
+   "tag": "at_threshold_floor32:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 204.5,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7552491.73460764
+  },
+  {
+   "id": "edge_113",
+   "tag": "at_threshold_next32:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 204.50001525878906,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7863571.326493922
+  },
+  {
+   "id": "edge_114",
+   "tag": "at_threshold_f64:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 87.75,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5901418.471267654
+  },
+  {
+   "id": "edge_115",
+   "tag": "at_threshold_floor32:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 87.75,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5901418.471267654
+  },
+  {
+   "id": "edge_116",
+   "tag": "at_threshold_next32:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 87.75000762939453,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5913772.915712098
+  },
+  {
+   "id": "edge_117",
+   "tag": "at_threshold_f64:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 528.489990234375,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 17231552.660224125
+  },
+  {
+   "id": "edge_118",
+   "tag": "at_threshold_floor32:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 528.489990234375,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 17231552.660224125
+  },
+  {
+   "id": "edge_119",
+   "tag": "at_threshold_next32:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 528.4900512695312,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 19905009.26362135
+  },
+  {
+   "id": "edge_120",
+   "tag": "at_threshold_f64:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 82.96500015258789,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6066964.530026646
+  },
+  {
+   "id": "edge_121",
+   "tag": "at_threshold_floor32:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 82.96499633789062,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6066964.530026646
+  },
+  {
+   "id": "edge_122",
+   "tag": "at_threshold_next32:lot_area_m2",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 82.96500396728516,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6089614.3472167365
+  },
+  {
+   "id": "edge_123",
+   "tag": "at_threshold_f64:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 2.5,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6405250.576160122
+  },
+  {
+   "id": "edge_124",
+   "tag": "at_threshold_floor32:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 2.5,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6405250.576160122
+  },
+  {
+   "id": "edge_125",
+   "tag": "at_threshold_next32:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 2.500000238418579,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_126",
+   "tag": "at_threshold_f64:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.5,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_127",
+   "tag": "at_threshold_floor32:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.5,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_128",
+   "tag": "at_threshold_next32:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.500000238418579,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 8073910.519722768
+  },
+  {
+   "id": "edge_129",
+   "tag": "at_threshold_f64:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 4.5,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 8077073.586944992
+  },
+  {
+   "id": "edge_130",
+   "tag": "at_threshold_floor32:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 4.5,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 8077073.586944992
+  },
+  {
+   "id": "edge_131",
+   "tag": "at_threshold_next32:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 4.500000476837158,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 8262777.038619342
+  },
+  {
+   "id": "edge_132",
+   "tag": "at_threshold_f64:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 2.5,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6405250.576160122
+  },
+  {
+   "id": "edge_133",
+   "tag": "at_threshold_floor32:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 2.5,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6405250.576160122
+  },
+  {
+   "id": "edge_134",
+   "tag": "at_threshold_next32:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 2.500000238418579,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_135",
+   "tag": "at_threshold_f64:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 2.5,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6405250.576160122
+  },
+  {
+   "id": "edge_136",
+   "tag": "at_threshold_floor32:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 2.5,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6405250.576160122
+  },
+  {
+   "id": "edge_137",
+   "tag": "at_threshold_next32:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 2.500000238418579,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_138",
+   "tag": "at_threshold_f64:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 2.5,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6405250.576160122
+  },
+  {
+   "id": "edge_139",
+   "tag": "at_threshold_floor32:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 2.5,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6405250.576160122
+  },
+  {
+   "id": "edge_140",
+   "tag": "at_threshold_next32:bedrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 2.500000238418579,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_141",
+   "tag": "at_threshold_f64:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.5,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_142",
+   "tag": "at_threshold_floor32:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.5,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_143",
+   "tag": "at_threshold_next32:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.500000238418579,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7660744.603664093
+  },
+  {
+   "id": "edge_144",
+   "tag": "at_threshold_f64:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 1.5,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5305729.12426795
+  },
+  {
+   "id": "edge_145",
+   "tag": "at_threshold_floor32:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 1.5,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5305729.12426795
+  },
+  {
+   "id": "edge_146",
+   "tag": "at_threshold_next32:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 1.5000001192092896,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_147",
+   "tag": "at_threshold_f64:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.5,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_148",
+   "tag": "at_threshold_floor32:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.5,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_149",
+   "tag": "at_threshold_next32:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.500000238418579,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7660744.603664093
+  },
+  {
+   "id": "edge_150",
+   "tag": "at_threshold_f64:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.5,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_151",
+   "tag": "at_threshold_floor32:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.5,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_152",
+   "tag": "at_threshold_next32:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.500000238418579,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7660744.603664093
+  },
+  {
+   "id": "edge_153",
+   "tag": "at_threshold_f64:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 1.5,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5305729.12426795
+  },
+  {
+   "id": "edge_154",
+   "tag": "at_threshold_floor32:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 1.5,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5305729.12426795
+  },
+  {
+   "id": "edge_155",
+   "tag": "at_threshold_next32:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 1.5000001192092896,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_156",
+   "tag": "at_threshold_f64:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 1.5,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5305729.12426795
+  },
+  {
+   "id": "edge_157",
+   "tag": "at_threshold_floor32:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 1.5,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 5305729.12426795
+  },
+  {
+   "id": "edge_158",
+   "tag": "at_threshold_next32:bathrooms",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 1.5000001192092896,
+    "lat": 7.07,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6692247.692739784
+  },
+  {
+   "id": "edge_159",
+   "tag": "at_threshold_f64:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 10.182000160217285,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7215018.3876976995
+  },
+  {
+   "id": "edge_160",
+   "tag": "at_threshold_floor32:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 10.182000160217285,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7215018.3876976995
+  },
+  {
+   "id": "edge_161",
+   "tag": "at_threshold_next32:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 10.182001113891602,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7220462.338349824
+  },
+  {
+   "id": "edge_162",
+   "tag": "at_threshold_f64:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 16.397500038146973,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 11531064.924604943
+  },
+  {
+   "id": "edge_163",
+   "tag": "at_threshold_floor32:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 16.397499084472656,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 11531064.924604943
+  },
+  {
+   "id": "edge_164",
+   "tag": "at_threshold_next32:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 16.39750099182129,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 12120962.155224081
+  },
+  {
+   "id": "edge_165",
+   "tag": "at_threshold_f64:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 16.35300064086914,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 10432152.522644898
+  },
+  {
+   "id": "edge_166",
+   "tag": "at_threshold_floor32:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 16.35300064086914,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 10432152.522644898
+  },
+  {
+   "id": "edge_167",
+   "tag": "at_threshold_next32:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 16.353002548217773,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 11205031.138152834
+  },
+  {
+   "id": "edge_168",
+   "tag": "at_threshold_f64:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 14.291000366210938,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7727942.621811552
+  },
+  {
+   "id": "edge_169",
+   "tag": "at_threshold_floor32:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 14.291000366210938,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7727942.621811552
+  },
+  {
+   "id": "edge_170",
+   "tag": "at_threshold_next32:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 14.291001319885254,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7838773.955957138
+  },
+  {
+   "id": "edge_171",
+   "tag": "at_threshold_f64:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 14.083000183105469,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7599571.907600751
+  },
+  {
+   "id": "edge_172",
+   "tag": "at_threshold_floor32:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 14.083000183105469,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7599571.907600751
+  },
+  {
+   "id": "edge_173",
+   "tag": "at_threshold_next32:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 14.083001136779785,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7604131.591175992
+  },
+  {
+   "id": "edge_174",
+   "tag": "at_threshold_f64:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 14.08899974822998,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7611261.706432583
+  },
+  {
+   "id": "edge_175",
+   "tag": "at_threshold_floor32:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 14.08899974822998,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7611261.706432583
+  },
+  {
+   "id": "edge_176",
+   "tag": "at_threshold_next32:lat",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 14.089000701904297,
+    "lng": 125.61,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7607519.311988138
+  },
+  {
+   "id": "edge_177",
+   "tag": "at_threshold_f64:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 120.46750259399414,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7848834.3483877545
+  },
+  {
+   "id": "edge_178",
+   "tag": "at_threshold_floor32:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 120.46749877929688,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7848834.3483877545
+  },
+  {
+   "id": "edge_179",
+   "tag": "at_threshold_next32:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 120.4675064086914,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7859278.69086352
+  },
+  {
+   "id": "edge_180",
+   "tag": "at_threshold_f64:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 121.27050018310547,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7566141.509726844
+  },
+  {
+   "id": "edge_181",
+   "tag": "at_threshold_floor32:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 121.27050018310547,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7566141.509726844
+  },
+  {
+   "id": "edge_182",
+   "tag": "at_threshold_next32:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 121.2705078125,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7526537.920999763
+  },
+  {
+   "id": "edge_183",
+   "tag": "at_threshold_f64:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.62300109863281,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6726111.087180015
+  },
+  {
+   "id": "edge_184",
+   "tag": "at_threshold_floor32:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.62300109863281,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6726111.087180015
+  },
+  {
+   "id": "edge_185",
+   "tag": "at_threshold_next32:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 125.62300872802734,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6739801.090437012
+  },
+  {
+   "id": "edge_186",
+   "tag": "at_threshold_f64:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 124.85400009155273,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6780702.898919184
+  },
+  {
+   "id": "edge_187",
+   "tag": "at_threshold_floor32:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 124.85399627685547,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6858115.913229589
+  },
+  {
+   "id": "edge_188",
+   "tag": "at_threshold_next32:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 124.85400390625,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 6780702.898919184
+  },
+  {
+   "id": "edge_189",
+   "tag": "at_threshold_f64:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 126.0620002746582,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 9978570.404211234
+  },
+  {
+   "id": "edge_190",
+   "tag": "at_threshold_floor32:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 126.06199645996094,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 9978570.404211234
+  },
+  {
+   "id": "edge_191",
+   "tag": "at_threshold_next32:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 126.06200408935547,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 9978238.18198901
+  },
+  {
+   "id": "edge_192",
+   "tag": "at_threshold_f64:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 124.23550033569336,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7089166.396386513
+  },
+  {
+   "id": "edge_193",
+   "tag": "at_threshold_floor32:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 124.2354965209961,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7126684.828979106
+  },
+  {
+   "id": "edge_194",
+   "tag": "at_threshold_next32:lng",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 120.0,
+    "lot_area_m2": 150.0,
+    "bedrooms": 3.0,
+    "bathrooms": 2.0,
+    "lat": 7.07,
+    "lng": 124.23550415039062,
+    "city": "Davao City",
+    "province": "Davao del Sur",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 7089166.396386513
+  },
+  {
+   "id": "edge_195",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 407.57,
+    "lot_area_m2": 369.6,
+    "bedrooms": 2.0,
+    "bathrooms": 0.0,
+    "lat": 11.675,
+    "lng": 121.1575,
+    "city": "Goa",
+    "province": "Occidental Mindoro",
+    "region": "Region XIII (Caraga)",
+    "property_type": "commercial"
+   },
+   "expected": 63401325.39501867
+  },
+  {
+   "id": "edge_196",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 190.25,
+    "lot_area_m2": null,
+    "bedrooms": 1.0,
+    "bathrooms": 4.0,
+    "lat": 12.3182,
+    "lng": 124.3405,
+    "city": "Bulan",
+    "province": "Quezon",
+    "region": "Region VIII (Eastern Visayas)",
+    "property_type": "house"
+   },
+   "expected": 12917982.582388751
+  },
+  {
+   "id": "edge_197",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 390.38,
+    "lot_area_m2": null,
+    "bedrooms": 6.0,
+    "bathrooms": 3.0,
+    "lat": 13.9167,
+    "lng": 125.0746,
+    "city": "Lake Sebu South Cotabato",
+    "province": "NCR, Fourth District",
+    "region": "Region V (Bicol Region)",
+    "property_type": "house"
+   },
+   "expected": 34189551.99515808
+  },
+  {
+   "id": "edge_198",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 55.85,
+    "lot_area_m2": 27.4,
+    "bedrooms": 4.0,
+    "bathrooms": 0.0,
+    "lat": 15.1138,
+    "lng": 121.3846,
+    "city": "Bugallon",
+    "province": "NCR, Third District",
+    "region": "Region X (Northern Mindanao)",
+    "property_type": "commercial"
+   },
+   "expected": 18875535.12305272
+  },
+  {
+   "id": "edge_199",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 67.04,
+    "lot_area_m2": 56.1,
+    "bedrooms": 3.0,
+    "bathrooms": 6.0,
+    "lat": 12.5447,
+    "lng": 124.2475,
+    "city": "Maramag Bukidnon",
+    "province": "Abra",
+    "region": "Region V (Bicol Region)",
+    "property_type": "house"
+   },
+   "expected": 6619098.955817301
+  },
+  {
+   "id": "edge_200",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 102.54,
+    "lot_area_m2": 179.2,
+    "bedrooms": 0.0,
+    "bathrooms": 6.0,
+    "lat": 10.6362,
+    "lng": 119.3428,
+    "city": "Science Munoz City",
+    "province": "Agusan del Sur",
+    "region": "Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)",
+    "property_type": "condo"
+   },
+   "expected": 35650260.230261594
+  },
+  {
+   "id": "edge_201",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 315.16,
+    "lot_area_m2": 432.2,
+    "bedrooms": 6.0,
+    "bathrooms": 5.0,
+    "lat": 15.2288,
+    "lng": 121.2879,
+    "city": "Balabac",
+    "province": "Rizal",
+    "region": "Region II (Cagayan Valley)",
+    "property_type": "commercial"
+   },
+   "expected": 84443547.14078535
+  },
+  {
+   "id": "edge_202",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 1032.32,
+    "lot_area_m2": null,
+    "bedrooms": 0.0,
+    "bathrooms": 3.0,
+    "lat": 10.7046,
+    "lng": 121.7034,
+    "city": "Alubijid",
+    "province": "Occidental Mindoro",
+    "region": "Region VII (Central Visayas)",
+    "property_type": "house"
+   },
+   "expected": 137895305.6462362
+  },
+  {
+   "id": "edge_203",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 277.27,
+    "lot_area_m2": null,
+    "bedrooms": 1.0,
+    "bathrooms": 0.0,
+    "lat": 11.039,
+    "lng": 122.3068,
+    "city": "Madalag",
+    "province": "Catanduanes",
+    "region": "Region XIII (Caraga)",
+    "property_type": "house"
+   },
+   "expected": 14619635.350151395
+  },
+  {
+   "id": "edge_204",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 27.36,
+    "lot_area_m2": 188.0,
+    "bedrooms": 4.0,
+    "bathrooms": 0.0,
+    "lat": 14.4237,
+    "lng": 119.0129,
+    "city": "Bislig City",
+    "province": "Compostela Valley",
+    "region": "Region IX (Zamboanga Peninsula)",
+    "property_type": "condo"
+   },
+   "expected": 24404983.242177397
+  },
+  {
+   "id": "edge_205",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 676.61,
+    "lot_area_m2": null,
+    "bedrooms": 6.0,
+    "bathrooms": 0.0,
+    "lat": 10.6761,
+    "lng": 121.6172,
+    "city": "Pandi",
+    "province": "Davao Oriental",
+    "region": "Region IV-B (MIMAROPA)",
+    "property_type": "commercial"
+   },
+   "expected": 97340958.83013876
+  },
+  {
+   "id": "edge_206",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 145.84,
+    "lot_area_m2": 497.1,
+    "bedrooms": 0.0,
+    "bathrooms": 6.0,
+    "lat": 15.5295,
+    "lng": 125.9169,
+    "city": "Batac Ilocos Norte",
+    "province": "Cagayan",
+    "region": "Region IV-A (CALABARZON)",
+    "property_type": "commercial"
+   },
+   "expected": 64334872.66595259
+  },
+  {
+   "id": "edge_207",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 743.76,
+    "lot_area_m2": null,
+    "bedrooms": 4.0,
+    "bathrooms": 4.0,
+    "lat": 9.906,
+    "lng": 123.2369,
+    "city": "Santo Tomas",
+    "province": "Ilocos Sur",
+    "region": "Region IV-B (MIMAROPA)",
+    "property_type": "house"
+   },
+   "expected": 106809667.56730606
+  },
+  {
+   "id": "edge_208",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 620.43,
+    "lot_area_m2": null,
+    "bedrooms": 8.0,
+    "bathrooms": 6.0,
+    "lat": 5.3203,
+    "lng": 124.8368,
+    "city": "Tanauan",
+    "province": "Aklan",
+    "region": "Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)",
+    "property_type": "house"
+   },
+   "expected": 82375707.19639206
+  },
+  {
+   "id": "edge_209",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 78.8,
+    "lot_area_m2": 223.8,
+    "bedrooms": 3.0,
+    "bathrooms": 1.0,
+    "lat": 6.9234,
+    "lng": 122.7167,
+    "city": "Bulakan",
+    "province": "Davao del Sur",
+    "region": "Region XII (SOCCSKSARGEN)",
+    "property_type": "lot"
+   },
+   "expected": 16305485.507304125
+  },
+  {
+   "id": "edge_210",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 347.91,
+    "lot_area_m2": 33.2,
+    "bedrooms": 8.0,
+    "bathrooms": 5.0,
+    "lat": 14.0393,
+    "lng": 121.9298,
+    "city": "Plain View",
+    "province": "Lanao del Norte",
+    "region": "Region IV-A (CALABARZON)",
+    "property_type": "lot"
+   },
+   "expected": 25145476.757165097
+  },
+  {
+   "id": "edge_211",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 84.6,
+    "lot_area_m2": 440.3,
+    "bedrooms": 3.0,
+    "bathrooms": 4.0,
+    "lat": 9.0694,
+    "lng": 120.6154,
+    "city": "Loboc",
+    "province": "Marinduque",
+    "region": "Region VIII (Eastern Visayas)",
+    "property_type": "condo"
+   },
+   "expected": 29115521.577814203
+  },
+  {
+   "id": "edge_212",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 41.05,
+    "lot_area_m2": null,
+    "bedrooms": 6.0,
+    "bathrooms": 1.0,
+    "lat": 18.2386,
+    "lng": 123.2328,
+    "city": "Remedios Trinidad",
+    "province": "Batangas",
+    "region": "Region XII (SOCCSKSARGEN)",
+    "property_type": "lot"
+   },
+   "expected": 36887519.22717382
+  },
+  {
+   "id": "edge_213",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 539.14,
+    "lot_area_m2": 242.5,
+    "bedrooms": 5.0,
+    "bathrooms": 3.0,
+    "lat": 17.5713,
+    "lng": 124.1397,
+    "city": "City of Mandaluyong",
+    "province": "Pangasinan",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 74912040.02742095
+  },
+  {
+   "id": "edge_214",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 84.98,
+    "lot_area_m2": null,
+    "bedrooms": 6.0,
+    "bathrooms": 1.0,
+    "lat": 5.615,
+    "lng": 120.947,
+    "city": "Calabanga",
+    "province": "Rizal",
+    "region": "Region VI (Western Visayas)",
+    "property_type": "condo"
+   },
+   "expected": 26099038.129456896
+  },
+  {
+   "id": "edge_215",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 93.82,
+    "lot_area_m2": null,
+    "bedrooms": 2.0,
+    "bathrooms": 5.0,
+    "lat": 18.1847,
+    "lng": 125.3533,
+    "city": "City of Bayawan",
+    "province": "Sarangani",
+    "region": "National Capital Region (NCR)",
+    "property_type": "commercial"
+   },
+   "expected": 49710379.106658444
+  },
+  {
+   "id": "edge_216",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 191.66,
+    "lot_area_m2": null,
+    "bedrooms": 1.0,
+    "bathrooms": 2.0,
+    "lat": 8.1591,
+    "lng": 123.461,
+    "city": "Malaybalay Bukidnon",
+    "province": "Laguna",
+    "region": "Region III (Central Luzon)",
+    "property_type": "house"
+   },
+   "expected": 9490957.865409436
+  },
+  {
+   "id": "edge_217",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 454.55,
+    "lot_area_m2": 44.8,
+    "bedrooms": 5.0,
+    "bathrooms": 2.0,
+    "lat": 17.8437,
+    "lng": 121.3328,
+    "city": "Legazpi City",
+    "province": "Cotabato City",
+    "region": "Region XI (Davao Region)",
+    "property_type": "house"
+   },
+   "expected": 44036626.91328429
+  },
+  {
+   "id": "edge_218",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 28.68,
+    "lot_area_m2": null,
+    "bedrooms": 6.0,
+    "bathrooms": 5.0,
+    "lat": 5.7129,
+    "lng": 121.7866,
+    "city": "Midsayap",
+    "province": "Nueva Vizcaya",
+    "region": "Region I (Ilocos Region)",
+    "property_type": "commercial"
+   },
+   "expected": 40356166.96785109
+  },
+  {
+   "id": "edge_219",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 32.51,
+    "lot_area_m2": 725.8,
+    "bedrooms": 2.0,
+    "bathrooms": 1.0,
+    "lat": 11.5003,
+    "lng": 123.5659,
+    "city": "Santa Cruz Metropolitanmanila",
+    "province": "Sorsogon",
+    "region": "Region XI (Davao Region)",
+    "property_type": "lot"
+   },
+   "expected": 23596061.491713986
+  },
+  {
+   "id": "edge_220",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 14.62,
+    "lot_area_m2": null,
+    "bedrooms": 8.0,
+    "bathrooms": 5.0,
+    "lat": 12.369,
+    "lng": 120.388,
+    "city": "Palanan",
+    "province": "Tawi-Tawi",
+    "region": "Region VII (Central Visayas)",
+    "property_type": "commercial"
+   },
+   "expected": 46121516.320689246
+  },
+  {
+   "id": "edge_221",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 198.49,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 3.0,
+    "lat": 13.6654,
+    "lng": 121.1401,
+    "city": "Jolo",
+    "province": "Nueva Vizcaya",
+    "region": "Region VI (Western Visayas)",
+    "property_type": "lot"
+   },
+   "expected": 32769811.227145743
+  },
+  {
+   "id": "edge_222",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 171.66,
+    "lot_area_m2": 43.1,
+    "bedrooms": 0.0,
+    "bathrooms": 1.0,
+    "lat": 11.5112,
+    "lng": 119.4404,
+    "city": "City of Gapan",
+    "province": "Southern Leyte",
+    "region": "Region X (Northern Mindanao)",
+    "property_type": "house"
+   },
+   "expected": 14702109.125680177
+  },
+  {
+   "id": "edge_223",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 358.09,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 0.0,
+    "lat": 12.8008,
+    "lng": 125.5681,
+    "city": "Maria Aurora",
+    "province": "Negros Oriental",
+    "region": "Region VIII (Eastern Visayas)",
+    "property_type": "commercial"
+   },
+   "expected": 101347230.75661217
+  },
+  {
+   "id": "edge_224",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 67.23,
+    "lot_area_m2": null,
+    "bedrooms": 6.0,
+    "bathrooms": 6.0,
+    "lat": 11.1155,
+    "lng": 124.9009,
+    "city": "Lugait",
+    "province": "Cavite",
+    "region": "Region IX (Zamboanga Peninsula)",
+    "property_type": "house"
+   },
+   "expected": 11058250.765820866
+  },
+  {
+   "id": "edge_225",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 124.57,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 5.0,
+    "lat": 14.0778,
+    "lng": 119.3862,
+    "city": "Soccorro",
+    "province": "Cavite",
+    "region": "Region XII (SOCCSKSARGEN)",
+    "property_type": "condo"
+   },
+   "expected": 26808009.32028272
+  },
+  {
+   "id": "edge_226",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 88.04,
+    "lot_area_m2": null,
+    "bedrooms": 1.0,
+    "bathrooms": 4.0,
+    "lat": 17.1378,
+    "lng": 121.2552,
+    "city": "Titay",
+    "province": "Davao Occidental",
+    "region": "Region VI (Western Visayas)",
+    "property_type": "commercial"
+   },
+   "expected": 48486409.84072026
+  },
+  {
+   "id": "edge_227",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 377.79,
+    "lot_area_m2": null,
+    "bedrooms": 8.0,
+    "bathrooms": 5.0,
+    "lat": 11.6407,
+    "lng": 124.9069,
+    "city": "Esperanza",
+    "province": "Capiz",
+    "region": "Region IV-A (CALABARZON)",
+    "property_type": "commercial"
+   },
+   "expected": 57988762.75555056
+  },
+  {
+   "id": "edge_228",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 829.73,
+    "lot_area_m2": 931.0,
+    "bedrooms": 8.0,
+    "bathrooms": 3.0,
+    "lat": 12.5818,
+    "lng": 124.8594,
+    "city": "Acacia Estates Taguig",
+    "province": "Cotabato",
+    "region": "Region VIII (Eastern Visayas)",
+    "property_type": "house"
+   },
+   "expected": 41870609.10990947
+  },
+  {
+   "id": "edge_229",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 39.79,
+    "lot_area_m2": 95.0,
+    "bedrooms": 1.0,
+    "bathrooms": 5.0,
+    "lat": 12.2385,
+    "lng": 122.9368,
+    "city": "Alitagtag",
+    "province": "Bukidnon",
+    "region": "Region V (Bicol Region)",
+    "property_type": "commercial"
+   },
+   "expected": 26380512.80652429
+  },
+  {
+   "id": "edge_230",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 68.16,
+    "lot_area_m2": 47.1,
+    "bedrooms": 8.0,
+    "bathrooms": 6.0,
+    "lat": 14.6035,
+    "lng": 119.6071,
+    "city": "Ortigas Pasig",
+    "province": "Zamboanga del Sur",
+    "region": "Region III (Central Luzon)",
+    "property_type": "commercial"
+   },
+   "expected": 42589025.02906447
+  },
+  {
+   "id": "edge_231",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 128.94,
+    "lot_area_m2": 129.1,
+    "bedrooms": 7.0,
+    "bathrooms": 3.0,
+    "lat": 15.1056,
+    "lng": 123.4729,
+    "city": "Tagkawayan",
+    "province": "Catanduanes",
+    "region": "Region IV-A (CALABARZON)",
+    "property_type": "condo"
+   },
+   "expected": 39196634.193505585
+  },
+  {
+   "id": "edge_232",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 113.55,
+    "lot_area_m2": 485.7,
+    "bedrooms": 4.0,
+    "bathrooms": 4.0,
+    "lat": 9.5413,
+    "lng": 120.5451,
+    "city": "Mangatarem",
+    "province": "Palawan",
+    "region": "Cordillera Administrative Region (CAR)",
+    "property_type": "condo"
+   },
+   "expected": 38814248.39473874
+  },
+  {
+   "id": "edge_233",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 97.99,
+    "lot_area_m2": 108.0,
+    "bedrooms": 6.0,
+    "bathrooms": 2.0,
+    "lat": 13.2872,
+    "lng": 121.8513,
+    "city": "San Ildefonso",
+    "province": "Agusan del Sur",
+    "region": "Region IV-A (CALABARZON)",
+    "property_type": "house"
+   },
+   "expected": 19402943.371213026
+  },
+  {
+   "id": "edge_234",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 128.42,
+    "lot_area_m2": null,
+    "bedrooms": 4.0,
+    "bathrooms": 3.0,
+    "lat": 18.815,
+    "lng": 126.024,
+    "city": "San Pablo City",
+    "province": "Basilan",
+    "region": "Region VI (Western Visayas)",
+    "property_type": "house"
+   },
+   "expected": 55054988.4292261
+  },
+  {
+   "id": "edge_235",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 92.67,
+    "lot_area_m2": 905.5,
+    "bedrooms": 0.0,
+    "bathrooms": 3.0,
+    "lat": 8.6195,
+    "lng": 125.9997,
+    "city": "Digos",
+    "province": "Sorsogon",
+    "region": "Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)",
+    "property_type": "house"
+   },
+   "expected": 27981394.218092542
+  },
+  {
+   "id": "edge_236",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 208.31,
+    "lot_area_m2": 437.3,
+    "bedrooms": 3.0,
+    "bathrooms": 3.0,
+    "lat": 6.5011,
+    "lng": 120.2618,
+    "city": "Malay Aklan",
+    "province": "Zambales",
+    "region": "Region IV-A (CALABARZON)",
+    "property_type": "house"
+   },
+   "expected": 21508836.98471174
+  },
+  {
+   "id": "edge_237",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 212.0,
+    "lot_area_m2": 228.5,
+    "bedrooms": 7.0,
+    "bathrooms": 5.0,
+    "lat": 9.4977,
+    "lng": 125.8176,
+    "city": "Palayan Nueva Ecija",
+    "province": "Cavite",
+    "region": "Region IX (Zamboanga Peninsula)",
+    "property_type": "lot"
+   },
+   "expected": 24019506.93138586
+  },
+  {
+   "id": "edge_238",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 64.74,
+    "lot_area_m2": null,
+    "bedrooms": 8.0,
+    "bathrooms": 3.0,
+    "lat": 5.9896,
+    "lng": 119.8308,
+    "city": "Dapa Surigao Del Norte",
+    "province": "Cotabato",
+    "region": "Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)",
+    "property_type": "lot"
+   },
+   "expected": 45921285.10588801
+  },
+  {
+   "id": "edge_239",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 223.38,
+    "lot_area_m2": null,
+    "bedrooms": 0.0,
+    "bathrooms": 4.0,
+    "lat": 16.0581,
+    "lng": 119.9754,
+    "city": "City of Gapan",
+    "province": "Batanes",
+    "region": "Region II (Cagayan Valley)",
+    "property_type": "condo"
+   },
+   "expected": 24173064.38500196
+  },
+  {
+   "id": "edge_240",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 43.65,
+    "lot_area_m2": 203.5,
+    "bedrooms": 1.0,
+    "bathrooms": 0.0,
+    "lat": 14.1033,
+    "lng": 120.677,
+    "city": "Bayawan Tulong",
+    "province": "Romblon",
+    "region": "Region V (Bicol Region)",
+    "property_type": "house"
+   },
+   "expected": 5048542.299599777
+  },
+  {
+   "id": "edge_241",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 126.51,
+    "lot_area_m2": null,
+    "bedrooms": 4.0,
+    "bathrooms": 3.0,
+    "lat": 6.7064,
+    "lng": 124.464,
+    "city": "Iligan City",
+    "province": "NCR, City of Manila, First District",
+    "region": "Region XII (SOCCSKSARGEN)",
+    "property_type": "lot"
+   },
+   "expected": 27861132.009098027
+  },
+  {
+   "id": "edge_242",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 154.17,
+    "lot_area_m2": null,
+    "bedrooms": 3.0,
+    "bathrooms": 1.0,
+    "lat": 15.3365,
+    "lng": 124.8595,
+    "city": "Rosario",
+    "province": "Cotabato",
+    "region": "Region XII (SOCCSKSARGEN)",
+    "property_type": "house"
+   },
+   "expected": 9469325.061195614
+  },
+  {
+   "id": "edge_243",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 167.44,
+    "lot_area_m2": null,
+    "bedrooms": 6.0,
+    "bathrooms": 4.0,
+    "lat": 16.5,
+    "lng": 122.167,
+    "city": "Mati City",
+    "province": "Guimaras",
+    "region": "Region X (Northern Mindanao)",
+    "property_type": "lot"
+   },
+   "expected": 33353823.19260948
+  },
+  {
+   "id": "edge_244",
+   "tag": "random_combo",
+   "source": "predict_price",
+   "inputs": {
+    "sqm": 31.13,
+    "lot_area_m2": 23.0,
+    "bedrooms": 4.0,
+    "bathrooms": 0.0,
+    "lat": 10.5816,
+    "lng": 121.0134,
+    "city": "Guindulman",
+    "province": "Surigao Del Norte",
+    "region": "Cordillera Administrative Region (CAR)",
+    "property_type": "commercial"
+   },
+   "expected": 15589492.250737658
+  },
+  {
+   "id": "edge_245",
+   "tag": "paper_backfill_replay",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": 95.0,
+    "lot_area_m2": null,
+    "bedrooms": 2.0,
+    "bathrooms": null,
+    "lat": 14.477,
+    "lng": 121.049,
+    "city": "Taguig City",
+    "province": "NCR, Fourth District",
+    "region": "National Capital Region (NCR)",
+    "property_type": "condo"
+   },
+   "expected": 26994354.196611766
+  },
+  {
+   "id": "edge_246",
+   "tag": "paper_backfill_replay_skipped",
+   "source": "reference_predict",
+   "inputs": {
+    "sqm": 95.0,
+    "lot_area_m2": 83.0,
+    "bedrooms": 2.0,
+    "bathrooms": null,
+    "lat": 14.477,
+    "lng": 121.049,
+    "city": "Taguig City",
+    "province": "NCR, Fourth District",
+    "region": "National Capital Region (NCR)",
+    "property_type": "condo"
+   },
+   "expected": 25308370.392011885
+  }
+ ]
+}

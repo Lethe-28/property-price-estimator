@@ -1,0 +1,7 @@
+# Not committed: the 43 MB dataset (see README) and the 216 MB fitted pipeline it produces.
+training/data/
+training/artifacts/
+__pycache__/
+node_modules/
+.playwright-mcp/
+*.log
