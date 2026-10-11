@@ -5,3 +5,4 @@ __pycache__/
 node_modules/
 .playwright-mcp/
 *.log
+.omc/
